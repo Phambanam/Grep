@@ -15,11 +15,11 @@ public class LauncherGrep {
  @Option(name = "-v", usage = " inverts the filter condition")
    private boolean inverts;
 
- @Argument( metaVar = "word", usage = "input argument")
+ @Argument(required = true, metaVar = "word", usage = "input argument")
    private  String word;
 
- @Argument( metaVar = "fileName", index = 1, usage = "input file name")
-   private String fileName;
+ @Argument(required = true, metaVar = "fileName", index = 1, usage = "input file name")
+   private String inputName;
 
 public static void main(String[] args){
    new LauncherGrep().launch(args);
@@ -36,7 +36,7 @@ public static void main(String[] args){
         return;
       }
 
-      Grep grep = new Grep(word,fileName);
+      Grep grep = new Grep(word,inputName);
       if(iCase) grep.setCmdI();
       if(regex) grep.setCmdR();
       if (inverts) grep.setCmdV();
