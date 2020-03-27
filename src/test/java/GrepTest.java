@@ -37,6 +37,15 @@ class GrepTest {
         regex.add("I’m a generous and easy-going person but when it comes to work , a competitive perfectionist.");
         regex.add("I’m also an optimistic and outgoing person so I have many friends and other social relationships. ");
         assertEquals(grep2.find(),regex);
+
+        // Вывод строк, не содержащих указанное слово
+        Grep grep3 = new Grep("I","inputName.txt");
+        grep3.setCmdV();
+        List<String> inverts = new ArrayList<String>();
+        inverts.add("My father is a teacher at a secondary school. He has worked for 35 years in the field and he is my biggest role model in life. My mother is a housewife.");
+        inverts.add("A degree in Civil Engineering enables me to achieve my goals and also gives me an opportunity to make a difference in the community.");
+        assertEquals(grep3.find(),inverts);
+
     }
 
 }
