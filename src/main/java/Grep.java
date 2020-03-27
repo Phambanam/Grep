@@ -16,11 +16,12 @@ public class Grep {
     public void setCmdR() { this.cmdR = true; }
     public void setCmdV() { this.cmdV = true; }
 
-    private String word,fileName;
+
+    private String word;
+    final String fileName ="inputName.txt";
 
      Grep(String word,String fileName){
         this.word = word;
-        this.fileName = fileName;
     }
     List<String> find() throws IOException{
 

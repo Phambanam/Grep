@@ -14,6 +14,7 @@ class GrepTest {
     @org.junit.jupiter.api.Test
     public void find() throws IOException {
         //   Вывод, содержащий указанное слово
+
         Grep grep = new Grep("I’m", "inputName.txt");
         List<String> Word = new ArrayList<String>();
         Word.add("I’m a generous and easy-going person but when it comes to work , a competitive perfectionist.");

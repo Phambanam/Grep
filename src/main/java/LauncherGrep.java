@@ -8,22 +8,27 @@ import java.io.IOException;
 public class LauncherGrep {
  @Option(name = "-i",usage = "Ignore Case")
    private boolean iCase;
+
  @Option(name = "-r", usage = "Search with regex")
    private boolean regex;
+
  @Option(name = "-v", usage = " inverts the filter condition")
    private boolean inverts;
- @Argument(required = true, metaVar = "word", usage = "input argument")
+
+ @Argument( metaVar = "word", usage = "input argument")
    private  String word;
- @Argument(required = true, metaVar = "fileName", index = 1, usage ="input file name" )
+
+ @Argument( metaVar = "fileName", index = 1, usage = "input file name")
    private String fileName;
+
 public static void main(String[] args){
    new LauncherGrep().launch(args);
 }
 
-   private void launch(String[] arg) {
+   private void launch(String[] args) {
        CmdLineParser parser = new CmdLineParser(this);
       try{
-         parser.parseArgument(arg);
+         parser.parseArgument(args);
       } catch (CmdLineException e) {
         System.err.println(e.getMessage());
         System.err.println("grep  -i -r -v word inputName.txt");
@@ -35,12 +40,9 @@ public static void main(String[] args){
       if(iCase) grep.setCmdI();
       if(regex) grep.setCmdR();
       if (inverts) grep.setCmdV();
+
       try{
-         for (String line : grep.find()) {
-             System.out.println(line);
-         }
-      }catch(IOException e){
-         e.printStackTrace();
-      }
+         for (String line : grep.find()) System.out.println(line);
+      }catch(IOException e){ e.printStackTrace(); }
    }
 }
