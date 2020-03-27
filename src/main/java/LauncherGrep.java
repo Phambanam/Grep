@@ -26,7 +26,7 @@ public static void main(String[] args){
          parser.parseArgument(arg);
       } catch (CmdLineException e) {
         System.err.println(e.getMessage());
-        System.err.println("java -jar Grep.jar  -i -r -v word inputName.txt");
+        System.err.println("grep  -i -r -v word inputName.txt");
         parser.printUsage(System.err);
         return;
       }
