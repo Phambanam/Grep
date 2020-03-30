@@ -12,17 +12,20 @@ public class Grep {
     private boolean cmdR = false;
     private boolean cmdV = false ;
 
+
+
+    private String word, fileName ;
+
+    public Grep(String word,String fileName){
+        this.word = word;
+        this.fileName = fileName;
+    }
+
     public void setCmdI() { this.cmdI = true;}
     public void setCmdR() { this.cmdR = true; }
     public void setCmdV() { this.cmdV = true; }
 
-    private String word, fileName ;
-
-     Grep(String word,String fileName){
-        this.word = word;
-        this.fileName = fileName;
-    }
-    List<String> find() throws IOException{
+    public List<String> find() throws IOException{
 
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
@@ -31,9 +34,32 @@ public class Grep {
         List<String> result = new ArrayList<String>();
         String line  = br.readLine();
         boolean tOrF;
-        while((line != null)){
-        String regex = (this.cmdR) ?  word : (".*" + word + ".*") ;
 
+        StringBuilder w = new StringBuilder();
+        boolean trOf = false;
+        //specialCharacter"!@#$%^&\\*(),.?\":{}|<>"
+
+        String special ="!@#$%^&\\*(),.?\":{}|<>";
+
+        for (int j = 0; j < word.length(); j++) {
+            StringBuilder t = new StringBuilder();
+            t.append(word.charAt(j));
+//            if (word.charAt(j) == '*' || word.charAt(j) == '(' || word.charAt(j) == ')'
+//                    || word.charAt(j) == '\\' || word.charAt(j) == '{' || word.charAt(j) == '}'
+//                    || word.charAt(j) == '"' || word.charAt(j) == '^') {
+            if(special.contains(t)) {
+            trOf = true;
+                w.append("\\").append(word.charAt(j));
+            } else{ w.append(word.charAt(j));
+            }
+            System.out.println(w);
+        }
+        System.out.println(w);
+
+        while((line != null)){
+            String regex;
+            if(trOf)   regex =   (this.cmdR) ? word : (".*" + w.toString() + ".*");
+            else regex = (this.cmdR) ?  word : (".*" + word + ".*") ;
         //https://www.geeksforgeeks.org/pattern-compilestring-method-in-java-with-examples/
 
         Pattern pattern = (this.cmdI) ? (Pattern.compile(regex,Pattern.CASE_INSENSITIVE)) : (Pattern.compile(regex));

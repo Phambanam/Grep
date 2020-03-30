@@ -35,7 +35,6 @@ public static void main(String[] args){
         parser.printUsage(System.err);
         return;
       }
-
       Grep grep = new Grep(word,inputName);
       if(iCase) grep.setCmdI();
       if(regex) grep.setCmdR();
