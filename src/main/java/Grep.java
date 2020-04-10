@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,25 +25,11 @@ public class Grep {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line = br.readLine();
             boolean tOrF;
-            StringBuilder w = new StringBuilder();
-            boolean trOf = false;
-
-            //specialCharacter"!@#$%^&\\*(),.?\":{}|<>"
-            String special = "!@#$%^&\\*(),.?\":{}|<>";
-
-            for (int j = 0; j < word.length(); j++) {
-                StringBuilder t = new StringBuilder();
-                t.append(word.charAt(j));
-                if (special.contains(t)) {
-                    trOf = true;
-                    w.append("\\").append(word.charAt(j));
-                } else w.append(word.charAt(j));
-            }
 
             while ((line != null)) {
                 String regex;
-                if (trOf) regex = (this.cmdR) ? word : ( w.toString() );
-                else regex = word;
+                 regex = (this.cmdR) ? word : ( Pattern.quote(word) );
+
                 //https://www.geeksforgeeks.org/pattern-compilestring-method-in-java-with-examples/
 
                 Pattern pattern = (this.cmdI) ? (Pattern.compile(regex, Pattern.CASE_INSENSITIVE))
