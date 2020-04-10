@@ -30,15 +30,13 @@ public static void main(String[] args){
       try{
          parser.parseArgument(args);
       } catch (CmdLineException e) {
-        System.err.println(e.getMessage());
-        System.err.println("grep  -i -r -v word inputName.txt");
-        parser.printUsage(System.err);
-        return;
+          System.err.println(e.getMessage());
+          System.err.println("grep  -i -r -v word inputName.txt");
+          parser.printUsage(System.err);
+          System.exit(1);
+          return;
       }
-      Grep grep = new Grep(word,inputName);
-      if(iCase) grep.setCmdI();
-      if(regex) grep.setCmdR();
-      if (inverts) grep.setCmdV();
+       Grep grep = new Grep(iCase, regex, inverts, word, inputName);
 
       try{
          for (String line : grep.find()) System.out.println(line);

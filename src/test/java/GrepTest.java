@@ -15,25 +15,24 @@ class GrepTest {
     public void find() throws IOException {
         //   Вывод, содержащий указанное слово
         //!@#$%^&\\*(),.?\":{}|<>
-        Grep grep = new Grep("I’m", "inputName.txt");
-        List<String> Word = new ArrayList<String>();
+        Grep grep = new Grep(false,false,false,"I’m", "inputName.txt");
+        List<String> Word = new ArrayList<>();
         Word.add("I’m a generous and easy-going person but when it comes to work , a competitive perfectionist.");
         Word.add("I’m also an optimistic and outgoing person so I have many friends and other social relationships.");
         assertEquals(grep.find(),Word);
 
 
         //   Вывод, содержащий указанное спецсимволы
-        Grep grep4 = new Grep("(*&^*****(%Phambanam","inputName.txt");
-        List<String> special = new ArrayList<String>();
+        Grep grep4 = new Grep(false,false,false,"(*&^*****(%Phambanam","inputName.txt");
+        List<String> special = new ArrayList<>();
         special.add("I love (*&^*****(%Phambanam my family.");
         special.add("I love (*&^*****(%Phambanam my family hahah.");
         assertEquals(grep4.find(),special);
 
 
         //Вывод строк, содержащих указанное слово, игнорировать регистр слов
-        Grep grep1 = new Grep("HavE","inputName.txt");
-        List<String> IgnoreCase = new ArrayList<String>();
-        grep1.setCmdI();
+        Grep grep1 = new Grep(true,false,false,"HavE","inputName.txt");
+        List<String> IgnoreCase = new ArrayList<>();
         IgnoreCase.add("I have a big family with six people.");
         IgnoreCase.add("I have two sisters and a brother.");
         IgnoreCase.add("I’m also an optimistic and outgoing person so I have many friends and other social relationships.");
@@ -41,18 +40,16 @@ class GrepTest {
         assertEquals(grep1.find(),IgnoreCase);
 
         //Вывод строк, содержащих указанное регулярное выражение
-        Grep grep2 = new Grep(".*(I’m).*|.*(father).*", "inputName.txt");
-        List<String> regex = new ArrayList<String>();
-        grep2.setCmdR();
+        Grep grep2 = new Grep(false,true,false,".*(I’m).*|.*(father).*", "inputName.txt");
+        List<String> regex = new ArrayList<>();
         regex.add("My father is a teacher at a secondary school.");
         regex.add("I’m a generous and easy-going person but when it comes to work , a competitive perfectionist.");
         regex.add("I’m also an optimistic and outgoing person so I have many friends and other social relationships.");
         assertEquals(grep2.find(),regex);
 
         // Вывод строк, не содержащих указанное слово
-        Grep grep3 = new Grep("I","inputName.txt");
-        grep3.setCmdV();
-        List<String> inverts = new ArrayList<String>();
+        Grep grep3 = new Grep(false,false,true,"I","inputName.txt");
+        List<String> inverts = new ArrayList<>();
         inverts.add("My sisters are older and my brother is younger than me.");
         inverts.add("My father is a teacher at a secondary school.");
         inverts.add("He has worked for 35 years in the field and he is my biggest role model in life. My mother is a housewife.");
