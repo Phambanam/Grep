@@ -38,8 +38,5 @@ public static void main(String[] args){
       }
        Grep grep = new Grep(iCase, regex, inverts, word, inputName);
 
-      try{
-         for (String line : grep.find()) System.out.println(line);
-      }catch(IOException e){ e.printStackTrace(); }
    }
 }
